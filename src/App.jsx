@@ -13,6 +13,9 @@ import Packages from "./components/Packages";
 
 import Login from "./admin/Login";
 import Dashboard from "./admin/Dashboard";
+import AdminPackages from "./admin/Packages";
+import Events from "./admin/Events";
+import Bookings from "./admin/Bookings";
 
 function HomePage() {
   return (
@@ -42,6 +45,21 @@ export default function App() {
         <Route path="/admin/login" element={<Login />} />
 
         <Route path="/admin/dashboard" element={<Dashboard />} />
+
+        <Route
+          path="/admin/packages"
+          element={<AdminPackages />}
+        />
+
+        <Route
+          path="/admin/events"
+          element={<Events />}
+        />
+
+        <Route
+          path="/admin/bookings"
+          element={<Bookings />}
+        />
 
       </Routes>
 
