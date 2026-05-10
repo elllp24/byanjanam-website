@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Booking from "./components/Booking";
 import Packages from "./components/Packages";
+import WhatsappButton from "./components/WhatsappButton";
 
 export default function App() {
   return (
