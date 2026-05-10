@@ -25,7 +25,7 @@ export default function Contact() {
             </h3>
 
             <p className="mt-4 text-red-100">
-              +91 XXXXX XXXXX
+              +91 79780 73184
             </p>
 
           </div>
@@ -37,7 +37,7 @@ export default function Contact() {
             </h3>
 
             <p className="mt-4 text-red-100">
-              info@byanjanam.com
+              contact@byanjanamcatering.com
             </p>
 
           </div>
