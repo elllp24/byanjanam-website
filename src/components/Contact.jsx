@@ -49,7 +49,7 @@ export default function Contact() {
             </h3>
 
             <p className="mt-4 text-red-100">
-              Kalinganagr, Bhubaneswar, Odisha, India
+              Kalinganagar, Bhubaneswar, Odisha, India
             </p>
 
           </div>
