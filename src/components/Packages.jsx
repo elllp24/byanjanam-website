@@ -5,13 +5,19 @@ export default function Packages() {
 
   const [packages, setPackages] = useState([]);
 
+  // LIVE BACKEND
+  const API = "https://byanjanam-backend.onrender.com";
+
+  // FETCH PACKAGES
   const fetchPackages = async () => {
 
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/packages/all"
+        `${API}/api/packages/all`
       );
+
+      console.log(res.data);
 
       setPackages(res.data);
 
@@ -31,16 +37,13 @@ export default function Packages() {
 
   return (
 
-    <section
-      id="packages"
-      className="py-20 bg-gray-100"
-    >
+    <section className="py-20 bg-gray-100">
 
       <div className="max-w-7xl mx-auto px-6">
 
-        <h1 className="text-5xl font-bold text-center mb-14">
-          Catering Packages
-        </h1>
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Our Packages
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
 
@@ -48,36 +51,20 @@ export default function Packages() {
 
             <div
               key={pkg._id}
-              className="bg-white rounded-3xl shadow-xl overflow-hidden"
+              className="bg-white rounded-2xl shadow-lg p-6"
             >
 
-              <img
-                src={`http://localhost:5000/uploads/${pkg.image}`}
-                alt={pkg.title}
-                className="w-full h-64 object-cover"
-              />
+              <h3 className="text-2xl font-bold mb-3">
+                {pkg.title}
+              </h3>
 
-              <div className="p-8">
+              <p className="text-red-600 text-2xl font-bold mb-4">
+                ₹ {pkg.price}
+              </p>
 
-                <h2 className="text-3xl font-bold">
-                  {pkg.title}
-                </h2>
-
-                <p className="text-red-600 text-2xl mt-4 font-semibold">
-                  {pkg.price}
-                </p>
-
-                <p className="text-gray-600 mt-5 leading-relaxed">
-                  {pkg.description}
-                </p>
-
-                <button
-                  className="mt-8 bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition"
-                >
-                  Book Now
-                </button>
-
-              </div>
+              <p className="text-gray-600">
+                {pkg.description}
+              </p>
 
             </div>
 
@@ -90,4 +77,5 @@ export default function Packages() {
     </section>
 
   );
+
 }
