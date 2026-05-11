@@ -1,95 +1,86 @@
-const packages = [
-  {
-    name: "Silver Package",
-    price: "₹499 / Plate",
-    features: [
-      "Welcome Drink",
-      "Starter",
-      "Main Course",
-      "Dessert",
-      "Buffet Setup",
-    ],
-  },
-  {
-    name: "Gold Package",
-    price: "₹799 / Plate",
-    features: [
-      "Premium Starters",
-      "Multi Cuisine Buffet",
-      "Live Counters",
-      "Desserts",
-      "Decoration Support",
-    ],
-  },
-  {
-    name: "Platinum Package",
-    price: "₹1299 / Plate",
-    features: [
-      "Luxury Buffet",
-      "Live BBQ",
-      "Premium Decoration",
-      "Unlimited Desserts",
-      "Complete Event Support",
-    ],
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Packages() {
+
+  const [packages, setPackages] = useState([]);
+
+  const fetchPackages = async () => {
+
+    try {
+
+      const res = await axios.get(
+        "http://localhost:5000/api/packages/all"
+      );
+
+      setPackages(res.data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+  useEffect(() => {
+
+    fetchPackages();
+
+  }, []);
+
   return (
-    <section id="packages" className="py-24 bg-white">
+
+    <section
+      id="packages"
+      className="py-20 bg-gray-100"
+    >
 
       <div className="max-w-7xl mx-auto px-6">
 
-        <div className="text-center mb-16">
-
-          <p className="text-red-600 font-semibold text-lg">
-            Catering Packages
-          </p>
-
-          <h2 className="text-5xl font-bold mt-3">
-            Choose Your Perfect Package
-          </h2>
-
-        </div>
+        <h1 className="text-5xl font-bold text-center mb-14">
+          Catering Packages
+        </h1>
 
         <div className="grid md:grid-cols-3 gap-8">
 
-          {packages.map((item, index) => (
+          {packages.map((pkg) => (
+
             <div
-              key={index}
-              className="bg-gray-50 rounded-3xl shadow-2xl p-10 hover:scale-105 transition"
+              key={pkg._id}
+              className="bg-white rounded-3xl shadow-xl overflow-hidden"
             >
 
-              <h3 className="text-3xl font-bold text-red-600">
-                {item.name}
-              </h3>
+              <img
+                src={`http://localhost:5000/uploads/${pkg.image}`}
+                alt={pkg.title}
+                className="w-full h-64 object-cover"
+              />
 
-              <p className="text-4xl font-bold mt-6">
-                {item.price}
-              </p>
+              <div className="p-8">
 
-              <ul className="mt-8 space-y-4">
+                <h2 className="text-3xl font-bold">
+                  {pkg.title}
+                </h2>
 
-                {item.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-lg"
-                  >
-                    ✅ {feature}
-                  </li>
-                ))}
+                <p className="text-red-600 text-2xl mt-4 font-semibold">
+                  {pkg.price}
+                </p>
 
-              </ul>
+                <p className="text-gray-600 mt-5 leading-relaxed">
+                  {pkg.description}
+                </p>
 
-              <a href="#booking">
-
-                <button className="mt-10 w-full bg-red-600 text-white py-4 rounded-2xl text-lg hover:bg-red-700 transition">
+                <button
+                  className="mt-8 bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition"
+                >
                   Book Now
                 </button>
 
-              </a>
+              </div>
 
             </div>
+
           ))}
 
         </div>
@@ -97,5 +88,6 @@ export default function Packages() {
       </div>
 
     </section>
+
   );
 }
