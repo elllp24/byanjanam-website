@@ -11,7 +11,7 @@ export default function Packages() {
   const [packages, setPackages] = useState([]);
 
   // LIVE BACKEND URL
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
 
   // FETCH PACKAGES
   const fetchPackages = async () => {
