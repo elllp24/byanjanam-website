@@ -11,7 +11,7 @@ export default function Packages() {
   const [packages, setPackages] = useState([]);
 
   // LIVE BACKEND URL
-  const API = "https://byanjanam-backend.onrender.com";
+  const API = "http://localhost:5000";
 
   // FETCH PACKAGES
   const fetchPackages = async () => {
