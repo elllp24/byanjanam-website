@@ -12,9 +12,19 @@ export default function Navbar() {
 
         {/* Logo */}
         <a href="#home">
-          <h1 className="text-3xl font-bold text-red-700 cursor-pointer">
-            Byanjanam
-          </h1>
+          <div className="flex items-center gap-3">
+  
+  <img
+    src="/favicon.png"
+    alt="Byanjanam"
+    className="w-12 h-12 rounded-full object-cover"
+  />
+
+  <h1 className="text-4xl font-bold text-red-700">
+    Byanjanam
+  </h1>
+
+</div>
         </a>
 
         {/* Desktop Menu */}
