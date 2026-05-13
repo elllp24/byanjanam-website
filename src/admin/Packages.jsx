@@ -4,14 +4,16 @@ import Sidebar from "./Sidebar";
 
 export default function Packages() {
 
+  // API URL FROM .env
+  const API = import.meta.env.VITE_API_URL;
+
+  // FORM STATES
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
+  // PACKAGE LIST
   const [packages, setPackages] = useState([]);
-
-  // LIVE BACKEND URL
-  const API = import.meta.env.VITE_API_URL;
 
   // FETCH PACKAGES
   const fetchPackages = async () => {
@@ -32,6 +34,7 @@ export default function Packages() {
 
   };
 
+  // LOAD PACKAGES ON PAGE LOAD
   useEffect(() => {
 
     fetchPackages();
@@ -56,10 +59,12 @@ export default function Packages() {
 
       alert("Package Added Successfully");
 
+      // CLEAR FORM
       setTitle("");
       setPrice("");
       setDescription("");
 
+      // RELOAD PACKAGES
       fetchPackages();
 
     } catch (error) {
@@ -72,11 +77,44 @@ export default function Packages() {
 
   };
 
+  // DELETE PACKAGE
+  const deletePackage = async (id) => {
+
+    const confirmDelete = window.confirm(
+      "Delete this package?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+      await axios.delete(
+        `${API}/api/packages/delete/${id}`
+      );
+
+      alert("Package Deleted Successfully");
+
+      fetchPackages();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Error Deleting Package");
+
+    }
+
+  };
+
   return (
 
     <div className="flex">
 
+      {/* SIDEBAR */}
+
       <Sidebar />
+
+      {/* MAIN CONTENT */}
 
       <div className="flex-1 p-10 bg-gray-100 min-h-screen">
 
@@ -84,7 +122,7 @@ export default function Packages() {
           Manage Packages
         </h1>
 
-        {/* FORM */}
+        {/* ADD PACKAGE FORM */}
 
         <div className="bg-white p-8 rounded-2xl shadow-lg max-w-2xl mb-10">
 
@@ -147,6 +185,8 @@ export default function Packages() {
 
             </div>
 
+            {/* BUTTON */}
+
             <button
               type="submit"
               className="bg-red-600 text-white px-8 py-3 rounded-xl hover:bg-red-700"
@@ -174,12 +214,21 @@ export default function Packages() {
               </h2>
 
               <p className="text-red-600 text-xl mt-3">
-                {pkg.price}
+                ₹ {pkg.price}
               </p>
 
               <p className="text-gray-600 mt-4">
                 {pkg.description}
               </p>
+
+              {/* DELETE BUTTON */}
+
+              <button
+                onClick={() => deletePackage(pkg._id)}
+                className="mt-5 bg-black text-white px-5 py-2 rounded-xl hover:bg-gray-800"
+              >
+                Delete
+              </button>
 
             </div>
 
