@@ -5,7 +5,7 @@ const router = express.Router();
 const Package = require("../models/Package");
 
 
-// GET ALL PACKAGES
+// GET ALL
 router.get("/all", async (req, res) => {
 
   try {
@@ -19,7 +19,7 @@ router.get("/all", async (req, res) => {
     console.log(error);
 
     res.status(500).json({
-      message: error.message,
+      error: error.message,
     });
 
   }
@@ -32,24 +32,26 @@ router.post("/add", async (req, res) => {
 
   try {
 
-    console.log(req.body);
+    console.log("BODY:", req.body);
 
     const newPackage = new Package({
+
       title: req.body.title,
       price: req.body.price,
       description: req.body.description,
+
     });
 
-    const savedPackage = await newPackage.save();
+    const saved = await newPackage.save();
 
-    res.status(201).json(savedPackage);
+    res.status(201).json(saved);
 
   } catch (error) {
 
     console.log(error);
 
     res.status(500).json({
-      message: error.message,
+      error: error.message,
     });
 
   }
